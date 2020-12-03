@@ -36,7 +36,7 @@ class GetSubWidget {
     } else if (element is SingleChildRenderObjectElement) {
       subWidgets += _getSubWidgetFromElement(element.child);
     } else {
-      assert(false, "->${element.runtimeType.toString()}");
+      print("${element.widget.runtimeType.toString()} not found");
       subWidgets += [];
     }
     return subWidgets;
