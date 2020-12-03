@@ -14,11 +14,14 @@ class GetSubWidget {
   }
 
   /// 根据element获取对应下面所有的子Widget
-  List<Widget> _getSubWidgetFromElement(Element? element) {
+  List<Widget> _getSubWidgetFromElement(Element element) {
     if (element == null) {
       return [];
     }
     List<Widget> subWidgets = [];
+    if (element != this._element && element.widget != null) {
+      subWidgets.add(element.widget);
+    }
     if (element is ComponentElement) {
       subWidgets += _getSubWidgetFromElement(element.child);
     } else if (element is InheritedElement) {
