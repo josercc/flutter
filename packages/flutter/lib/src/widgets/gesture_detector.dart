@@ -773,10 +773,10 @@ class GestureDetector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GestureTapCallback onTapCallBack = this.onTap;
-    GestureTapCallback onTap;
-    if (onTapCancel != null) {
-      onTap = () {
+    final GestureTapCallback onTapCallBack = this.onTap;
+    GestureTapCallback _onTapCallBack;
+    if (onTapCallBack != null) {
+      _onTapCallBack = () {
         GestureDetector._listenOnTapCallBack(this.identifier);
         onTapCallBack();
       };
@@ -784,7 +784,7 @@ class GestureDetector extends StatelessWidget {
     final Map<Type, GestureRecognizerFactory> gestures = <Type, GestureRecognizerFactory>{};
     if (onTapDown != null ||
         onTapUp != null ||
-        onTap != null ||
+        _onTapCallBack != null ||
         onTapCancel != null ||
         onSecondaryTap != null ||
         onSecondaryTapDown != null ||
@@ -799,7 +799,7 @@ class GestureDetector extends StatelessWidget {
           instance
             ..onTapDown = onTapDown
             ..onTapUp = onTapUp
-            ..onTap = onTap
+            ..onTap = _onTapCallBack
             ..onTapCancel = onTapCancel
             ..onSecondaryTap = onSecondaryTap
             ..onSecondaryTapDown = onSecondaryTapDown
